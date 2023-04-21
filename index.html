@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>RocketNews</title>
+</head>
+<body>
+    
+        <section class="left-section">
+           <div class="div-logo">
+                <img class="logo" src="./assets/logo.svg" alt="">
+           </div>
+           <div class="div-textos">
+                <p class="h1">atualize ideias e informações em 5 minutos.</p>
+                <p class="h2">tudo que você precisa saber para começar seu dia bem e informado</p>
+                <p class="h3">noticias sobre o universo Rocketseat, e tudo o que precisa para começar o dia melhor. <br>
+                    perfeito para se preparar para codar ☕</p>
+           </div>
+
+           <label class="email-label" for="email">Insira seu e-mail: </label>
+
+           <form method="post"  id="google-sheet" class="email-div">
+                <input name="email" type="email" class="email-input" placeholder="rocket@rocket.com">
+                <button class="submit" type="submit"><img class="button-img" src="./assets/send.svg"></button>
+           </form>
+
+           <div class="termos">
+             <a href="#" class="termos-a">deixe-me ler primeiro</a>
+             <img class="arrow-img" src="./assets/arrow-right.svg">
+           </div>
+        </section>
+
+
+        <section class="right-section">
+            <img class="right-img" src="./assets/read_news.jpg" >
+            
+        </section>
+
+
+        <div id="toast"><div id="desc">Email enviado com sucesso!!</div></div>
+
+
+</body>
+
+<script>
+   const scriptURL = 'https://script.google.com/macros/s/AKfycbzt5Dy0EpQLwU0vAtKlxCow-fcaJzSRRECj1R5SBMi_QtQo5zZb_Ht9Fhnw_UuzRuTCqQ/exec'
+   const form = document.forms['google-sheet']
+
+   function launch_toast() {
+    var x = document.getElementById("toast")
+    x.className = "show";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 5000);
+}
+
+   form.addEventListener('submit', e => {
+    e.preventDefault()
+    fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+    .then(response =>  launch_toast())
+    .catch(error => console.error('Erro ao enviar', error.message))
+
+
+    
+   })
+
+   
+  </script>
+</body>
+</html>
